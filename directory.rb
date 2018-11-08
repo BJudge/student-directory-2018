@@ -32,9 +32,10 @@ end
 def find_student(students)
     puts "Enter first letter of student(s) you wish to search for:"
     searched_letter = gets.chomp.downcase
-    students.each.with_index(1) do |student, i|
-      if student[:name].start_with?(searched_letter) 
-        puts "#{i}: #{student[:name]}"
+    search_result = 0
+    students.each do |student|
+      if student[:name].start_with?(searched_letter)
+        puts "#{search_result+=1}: #{student[:name]}"
 
       end
     end
