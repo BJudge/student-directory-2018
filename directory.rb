@@ -4,14 +4,14 @@ def input_students
 
   students = []
 
-  name = gets.chomp
+  name = gets.chomp.downcase
 
   while !name.empty? do
 
     students << {name: name, cohort: :november}
     puts "Now we have #{students.count} students"
 
-    name = gets.chomp
+    name = gets.chomp.downcase
   end
 
   students
@@ -28,12 +28,24 @@ def print(students)
     |student, i| puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
   }
 end
+  def find_student(students)
+    puts "Enter first letter of student(s) you wish to search for:"
+    searched_letter = gets.chomp.downcase
+    students.each.with_index(1) do |student, i|
+      if student[:name][0] == searched_letter
+        puts "#{i}: #{student[:name]}"
 
-def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+      end
+    end
+
+  end
+
+def print_footer(students)
+  puts "\n Overall, we have #{students.count} great students"
 end
 
 students = input_students
 print_header
 print(students)
+find_student(students)
 print_footer(students)
