@@ -28,17 +28,19 @@ def print(students)
     |student, i| puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
   }
 end
-  def find_student(students)
+
+def find_student(students)
     puts "Enter first letter of student(s) you wish to search for:"
     searched_letter = gets.chomp.downcase
     students.each.with_index(1) do |student, i|
-      if student[:name][0] == searched_letter
+      if student[:name].start_with?(searched_letter) 
         puts "#{i}: #{student[:name]}"
 
       end
     end
+end
 
-  end
+
 
 def print_footer(students)
   puts "\n Overall, we have #{students.count} great students"
