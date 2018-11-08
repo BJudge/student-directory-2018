@@ -23,11 +23,31 @@ def print_header
   puts "--------------"
 end
 
-def print(students)
-  students.each.with_index(1) {
-    |student, i| puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
-  }
+def print3(students)
+  # answer helped by https://stackoverflow.com/questions/53211334/ruby-until-loop-undefined-method-for-nilnilclass-nomethoderror/53211611#53211611
+  i = 0
+   until i == students.length
+
+     puts "#{i+1} #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+     i += 1
+   end
 end
+
+
+
+#def print2(students)
+#  i = 0
+#  while i < students.length
+#    puts "#{i+1} #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+#    i +=1
+#  end
+#end
+
+#def print(students)
+#  students.each.with_index(1) {
+#    |student, i| puts "#{i}: #{student[:name]} #(#{student[:cohort]} cohort)"
+  #}
+#end
 
 def find_student(students)
     puts "Enter first letter of student(s) you wish to search for:"
@@ -60,7 +80,7 @@ end
 
 students = input_students
 print_header
-print(students)
+print3(students)
 find_student(students)
 student_length(students)
 print_footer(students)
