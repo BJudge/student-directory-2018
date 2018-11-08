@@ -41,6 +41,17 @@ def find_student(students)
     end
 end
 
+def student_length(students)
+  puts "Enter the maximum desried characters in searched name:"
+  character_limit = gets.chomp.to_i
+  search_result = 0
+  students.each do |student|
+    if student[:name].length <= character_limit
+      puts "#{search_result+=1}: #{student[:name]}"
+    end
+  end
+end
+
 
 
 def print_footer(students)
@@ -51,4 +62,5 @@ students = input_students
 print_header
 print(students)
 find_student(students)
+student_length(students)
 print_footer(students)
