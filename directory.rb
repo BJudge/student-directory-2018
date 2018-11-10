@@ -22,6 +22,10 @@ def input_students
 
     puts "Student Name:"
     name = gets.chomp.downcase
+    if
+      name.empty?
+      break
+    end
     puts "Student date of Birth:"
     date_of_birth = gets.chomp
     puts "Favourite Hobby"
