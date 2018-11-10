@@ -1,14 +1,18 @@
 def input_students
-  puts "Please enter the names of the students"
+  puts "Please enter the details of the student(s)"
   puts "To finish, just hit return twice"
 
   students = []
-
+  puts "Student Name:"
   name = gets.chomp.downcase
+  puts "Student date of Birth:"
+  date_of_birth = gets.chomp
+  puts "Favourite Hobby"
+  hobby = gets.chomp.downcase
 
   while !name.empty? do
 
-    students << {name: name, cohort: :november}
+    students << {name: name, date_of_birth: date_of_birth, hobby: hobby, cohort: :november}
     puts "Now we have #{students.count} students"
 
     name = gets.chomp.downcase
@@ -28,7 +32,7 @@ def print3(students)
   i = 0
    until i == students.length
 
-     puts "#{i+1} #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+     puts "#{i+1} Name: #{students[i][:name]}  D.O.B: #{students[i] [:date_of_birth]} Favourite Hobby: #{students[i] [:hobby]} (#{students[i][:cohort]} cohort)"
      i += 1
    end
 end
