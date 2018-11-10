@@ -18,9 +18,13 @@ def input_students
     cohort = :"Not Supplied" if cohort.empty?
 
     students << {name: name, date_of_birth: date_of_birth, hobby: hobby, cohort: cohort}
-    puts "Now we have #{students.count} students".center(80)
+    if students.count == 1
+    puts "Now we have #{students.count} student".center(80)
+    else
+      puts "Now we have #{students.count} students".center(80)
+    end
 
-    puts "Student Name:"
+      puts "Student Name:"
     name = gets.chomp.downcase
     if
       name.empty?
@@ -39,8 +43,8 @@ def input_students
 end
 
 def print_header
-  puts "The students of Villains Academy".center(400)
-  puts "--------------".center(400)
+  puts "The students of Villains Academy".center(200)
+  puts "--------------".center(200)
 end
 
 def print3(students)
@@ -74,7 +78,9 @@ def find_student(students)
     searched_letter = gets.chomp.downcase
     search_result = 0
     students.each do |student|
-      if student[:name].start_with?(searched_letter)
+      if searched_letter.empty?
+        break
+      elsif student[:name].start_with?(searched_letter)
         puts "#{search_result+=1}: #{student[:name]}"
       end
     end
@@ -94,7 +100,11 @@ end
 
 
 def print_footer(students)
-  puts "\n Overall, we have #{students.count} great students".center(200)
+  if students.count == 1
+  puts "\n Overall, we have #{students.count} great student".center(300)
+  else
+    puts "\n Overall, we have #{students.count} great students".center(300)
+  end
 end
 
 students = input_students
