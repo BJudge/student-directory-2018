@@ -9,13 +9,25 @@ def input_students
   date_of_birth = gets.chomp
   puts "Favourite Hobby"
   hobby = gets.chomp.downcase
+  puts "Student Cohort"
+  cohort = gets.chomp.downcase.to_sym
+
 
   while !name.empty? do
 
-    students << {name: name, date_of_birth: date_of_birth, hobby: hobby, cohort: :november}
-    puts "Now we have #{students.count} students"
+    cohort = :"Not Supplied" if cohort.empty?
 
+    students << {name: name, date_of_birth: date_of_birth, hobby: hobby, cohort: cohort}
+    puts "Now we have #{students.count} students".center(80)
+
+    puts "Student Name:"
     name = gets.chomp.downcase
+    puts "Student date of Birth:"
+    date_of_birth = gets.chomp
+    puts "Favourite Hobby"
+    hobby = gets.chomp.downcase
+    puts "Student Cohort"
+    cohort = gets.chomp.downcase.to_sym
   end
 
   students
@@ -23,8 +35,8 @@ def input_students
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "--------------"
+  puts "The students of Villains Academy".center(400)
+  puts "--------------".center(400)
 end
 
 def print3(students)
@@ -60,7 +72,6 @@ def find_student(students)
     students.each do |student|
       if student[:name].start_with?(searched_letter)
         puts "#{search_result+=1}: #{student[:name]}"
-
       end
     end
 end
@@ -79,7 +90,7 @@ end
 
 
 def print_footer(students)
-  puts "\n Overall, we have #{students.count} great students"
+  puts "\n Overall, we have #{students.count} great students".center(200)
 end
 
 students = input_students
