@@ -1,32 +1,42 @@
+@students = []
 
 def interactive_menu
-  students = []
-  loop do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    selection = gets.chomp
-      case selection
-        when "1"
-          students = input_students
-        when "2"
-          print_header
-          print3(students)
-          print_footer(students)
-        when "9"
-          exit
-        else
-          puts "I don't know what you meant, try again"
-      end
+    loop do
+    print_menu
+    process(gets.chomp)
+  end
+
+end
+
+def process(selection)
+  case selection
+    when "1"
+      input_students
+    when "2"
+      show_students
+    when "9"
+      exit
+    else
+      puts "I don't know what you mean, try again"
   end
 end
 
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+def show_students
+  print_header
+  print3
+  print_footer
+end
 
 def input_students
   puts "Please enter the details of the student(s)"
   puts "To finish, just hit return twice"
 
-  students = []
   puts "Student Name:"
   name = gets.chomp.downcase
   puts "Student date of Birth:"
@@ -41,11 +51,11 @@ def input_students
 
     cohort = :"Not Supplied" if cohort.empty?
 
-    students << {name: name, date_of_birth: date_of_birth, hobby: hobby, cohort: cohort}
-    if students.count == 1
-    puts "Now we have #{students.count} student".center(80)
+    @students << {name: name, date_of_birth: date_of_birth, hobby: hobby, cohort: cohort}
+    if @students.count == 1
+    puts "Now we have #{@students.count} student".center(80)
     else
-      puts "Now we have #{students.count} students".center(80)
+      puts "Now we have #{@students.count} students".center(80)
     end
 
       puts "Student Name:"
@@ -62,7 +72,7 @@ def input_students
     cohort = gets.chomp.downcase.to_sym
   end
 
-  students
+
 
 end
 
@@ -71,12 +81,12 @@ def print_header
   puts "--------------".center(200)
 end
 
-def print3(students)
+def print3
   # answer helped by https://stackoverflow.com/questions/53211334/ruby-until-loop-undefined-method-for-nilnilclass-nomethoderror/53211611#53211611
   i = 0
-   until i == students.length
+   until i == @students.length
 
-     puts "#{i+1} Name: #{students[i][:name]}  D.O.B: #{students[i] [:date_of_birth]} Favourite Hobby: #{students[i] [:hobby]} (#{students[i][:cohort]} cohort)"
+     puts "#{i+1} Name: #{@students[i][:name]}  D.O.B: #{@students[i] [:date_of_birth]} Favourite Hobby: #{@students[i] [:hobby]} (#{@students[i][:cohort]} cohort)"
      i += 1
    end
 end
@@ -97,11 +107,11 @@ end
   #}
 #end
 
-def find_student(students)
+def find_student
     puts "Enter first letter of student(s) you wish to search for:"
     searched_letter = gets.chomp.downcase
     search_result = 0
-    students.each do |student|
+    @students.each do |student|
       if searched_letter.empty?
         break
       elsif student[:name].start_with?(searched_letter)
@@ -110,11 +120,11 @@ def find_student(students)
     end
 end
 
-def student_length(students)
+def student_length
   puts "Enter the maximum desried characters in searched name:"
   character_limit = gets.chomp.to_i
   search_result = 0
-  students.each do |student|
+  @students.each do |student|
     if student[:name].length <= character_limit
       puts "#{search_result+=1}: #{student[:name]}"
     end
@@ -123,11 +133,11 @@ end
 
 
 
-def print_footer(students)
-  if students.count == 1
-  puts "\n Overall, we have #{students.count} great student".center(300)
+def print_footer
+  if @students.count == 1
+  puts "\n Overall, we have #{@students.count} great student".center(300)
   else
-    puts "\n Overall, we have #{students.count} great students".center(300)
+    puts "\n Overall, we have #{@students.count} great students".center(300)
   end
 end
 
