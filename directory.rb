@@ -1,11 +1,24 @@
 @students = []
 
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+  load_students(filename)
+  puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist."
+    exit
+  end
+end
+
+
+
 def interactive_menu
     loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
-
 end
 
 def process(selection)
@@ -44,13 +57,13 @@ def input_students
   puts "To finish, just hit return twice"
 
   puts "Student Name:"
-  name = gets.chomp.downcase
+  name = STDIN.gets.chomp.downcase
   puts "Student date of Birth:"
-  date_of_birth = gets.chomp
+  date_of_birth = STDIN.gets.chomp
   puts "Favourite Hobby"
-  hobby = gets.chomp.downcase
+  hobby = STDIN.gets.chomp.downcase
   puts "Student Cohort"
-  cohort = gets.chomp.downcase.to_sym
+  cohort = STDIN.gets.chomp.downcase.to_sym
 
 
   while !name.empty? do
@@ -65,17 +78,17 @@ def input_students
     end
 
       puts "Student Name:"
-    name = gets.chomp.downcase
+    name = STDIN.gets.chomp.downcase
     if
       name.empty?
       break
     end
     puts "Student date of Birth:"
-    date_of_birth = gets.chomp
+    date_of_birth = STDIN.gets.chomp
     puts "Favourite Hobby"
-    hobby = gets.chomp.downcase
+    hobby = STDIN.gets.chomp.downcase
     puts "Student Cohort"
-    cohort = gets.chomp.downcase.to_sym
+    cohort = STDIN.gets.chomp.downcase.to_sym
   end
 end
 
@@ -90,7 +103,7 @@ def save_students
   file.close
 end
 
-def load_students
+def load_students(filename = "students.csv")
   file = File.open("students.csv", "r")
   file.readlines.each {
     |line|
@@ -133,7 +146,7 @@ end
 
 def find_student
     puts "Enter first letter of student(s) you wish to search for:"
-    searched_letter = gets.chomp.downcase
+    searched_letter = STDIN.gets.chomp.downcase
     search_result = 0
     @students.each do |student|
       if searched_letter.empty?
@@ -146,7 +159,7 @@ end
 
 def student_length
   puts "Enter the maximum desried characters in searched name:"
-  character_limit = gets.chomp.to_i
+  character_limit = STDIN.gets.chomp.to_i
   search_result = 0
   @students.each do |student|
     if student[:name].length <= character_limit
